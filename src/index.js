@@ -19,8 +19,13 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 app.set('view engine', 'ejs');
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors(corsOptions))
+
 // Configure multer to handle file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
