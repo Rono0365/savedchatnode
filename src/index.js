@@ -196,9 +196,15 @@ app.post('/send-message', upload.single('file'), (req, res) => {
   io.to(room).emit('chat message', { room: room, message: message, imageUrl: imageUrl });
 });
 app.get('/messages', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Replace with allowed origin
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // ... send your response data
   res.json(messages); // Return the messages as JSON
 });
 app.get('/messages/:room', async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Replace with allowed origin
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // ... send your response data
   const room = req.params.room;
 
   // Retrieve messages for the specified room
