@@ -19,7 +19,7 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 app.set('view engine', 'ejs');
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 // Configure multer to handle file uploads
 const storage = multer.diskStorage({
