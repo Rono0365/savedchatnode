@@ -16,6 +16,9 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 const corsOptions = {
   origin: ['*'], // Replace with your Flutter app's origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers (optional)
+  
   optionsSuccessStatus: 200
 };
 app.set('view engine', 'ejs');
