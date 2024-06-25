@@ -15,11 +15,10 @@ const supabaseUrl = 'https://steuaippbrlbwilvzltr.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0ZXVhaXBwYnJsYndpbHZ6bHRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTExNjYsImV4cCI6MjAzMDYyNzE2Nn0.MJY3oTZ9iwL5jq_R3swYyT8DM-tXF7cWyR_R9RkU1D0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 const corsOptions = {
-  origin: ['*'], // Replace with your Flutter app's origin
+  origin: ['*'], // Allow all origins for development (not recommended for production)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers (optional)
-  
-  optionsSuccessStatus: 200
+  credentials: true // Allow cookies (optional)
 };
 app.set('view engine', 'ejs');
 app.use(cors(corsOptions));
