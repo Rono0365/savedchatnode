@@ -14,17 +14,19 @@ const xx =[];
 const supabaseUrl = 'https://steuaippbrlbwilvzltr.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0ZXVhaXBwYnJsYndpbHZ6bHRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNTExNjYsImV4cCI6MjAzMDYyNzE2Nn0.MJY3oTZ9iwL5jq_R3swYyT8DM-tXF7cWyR_R9RkU1D0';
 const supabase = createClient(supabaseUrl, supabaseKey);
-/*const corsOptions = {
+const corsOptions = {
   origin: ['*'], // Allow all origins for development (not recommended for production)
-  
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers (optional)
-  optionsSuccessStatus: 200,
-  credentials: true // Allow cookies (optional)
-};*/
+  // Allow cookies (optional)
+};
 app.set('view engine', 'ejs');
-app.use(cors({origin: '*'}));
-
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+})
 // Configure multer to handle file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -204,18 +206,9 @@ app.get('/messages/:room', async (req, res) => {
   const room = req.params.room;
 
   // Retrieve messages for the specified room
-  fetchData();
-  const { data, error } = await supabase
-      .from('chatnode1')
-      .select('message')
-      .order('id', { ascending: false })
-      .limit(1);
-
-  if (error) {
-      console.error('Error fetching data:', error);
-      return;
-  }
-  const x1 = JSON.parse(data.map((tt) => tt['message']));
+  //fetchData();
+  
+  //const x1 = JSON.parse(data.map((tt) => tt['message']));
   //x1 === saved directly on a supabase server 
   //downfall for that is that it's slow and behaves weird in prod
   //returned the old system works fine except no data us saved for p2p chat (xx)
